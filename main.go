@@ -2,65 +2,49 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	names := []string{"a", "b", "c",
-		"d", "e"}
-	fmt.Println(groupies(names))
-}
+	names3 := []string{"a", "b", "c",
+		"d", "e", "h"}
+	fmt.Println(grouper(Shuffle(names3)))
 
-func groupies(names []string) [][]string {
-	newNames := Shuffle(names)
-	groups := [][]string{}
+	names4 := []string{"a", "b", "c",
+		"d", "e", "h"}
+	fmt.Println(grouper(Shuffle(names4)))
 
-	// 17
-	// 3
-	// 4
-	// 5
-	size := len(names)
+	names5 := []string{"a", "b", "c",
+		"d", "e", "h"}
+	fmt.Println(grouper(Shuffle(names5)))
 
-	group := []string{}
-	for _, name := range newNames {
-		group = append(group, name)
+	names17 := []string{
+		"a", "b", "c",
+		"d", "e", "f",
+		"g", "h", "i",
+		"j", "k", "l",
+		"m", "n", "o",
+		"p", "q",
 	}
-
-	_ = groups
-
-	// if len(names) >= 3 || len(names) <= 5 {
-	// 	return [][]string{names}
-	// }
-
-	// //  {"a"}
-	// //	{"a", "b", "c", "d", "e"}
-
-	// len(names) / 3
-	// len(names) / 4
-	// len(names) / 5
-	// // 1 R2
-
-	// for _, n := range names {
-
-	// }
-
-	return [][]string{}
+	fmt.Println(grouper(Shuffle(names17)))
 }
 
 func grouper(names []string) [][]string {
-	k := 5
-	if len(names) >= 3 || len(names) <= 5 {
+	if len(names) >= 3 && len(names) <= 5 {
 		return [][]string{names}
 	}
 
-	return append(grouper(names[k:]), names[0:k])
+	return append(grouper(names[3:]), names[0:3])
 }
 
-// func Shuffle(vals []string) []string {
-// 	r := rand.New(rand.NewSource(time.Now().Unix()))
-// 	ret := make([]string, len(vals))
-// 	perm := r.Perm(len(vals))
-// 	for i, randIndex := range perm {
-// 		ret[i] = vals[randIndex]
-// 	}
-// 	return ret
-// }
+func Shuffle(vals []string) []string {
+	return vals
+	r := rand.New(rand.NewSource(time.Now().Unix()))
+	ret := make([]string, len(vals))
+	perm := r.Perm(len(vals))
+	for i, randIndex := range perm {
+		ret[i] = vals[randIndex]
+	}
+	return ret
+}
