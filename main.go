@@ -39,7 +39,6 @@ func grouper(names []string) [][]string {
 }
 
 func Shuffle(vals []string) []string {
-	return vals
 	r := rand.New(rand.NewSource(time.Now().Unix()))
 	ret := make([]string, len(vals))
 	perm := r.Perm(len(vals))
