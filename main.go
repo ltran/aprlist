@@ -47,3 +47,19 @@ func Shuffle(vals []string) []string {
 	}
 	return ret
 }
+
+func grouperIter(names []string) [][]string {
+	groups := [][]string{}
+	for len(names) > 5 {
+		groups = append(groups, names[0:3])
+		names = names[3:]
+	}
+
+	// handle leftovers
+	if len(names) != 0 {
+		groups = append(groups, names)
+
+	}
+
+	return groups
+}
