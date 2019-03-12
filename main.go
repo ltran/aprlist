@@ -9,16 +9,10 @@ import (
 func main() {
 	names3 := []string{"a", "b", "c",
 		"d", "e", "h"}
-	fmt.Println(grouper(Shuffle(names3)))
-
 	names4 := []string{"a", "b", "c",
 		"d", "e", "h"}
-	fmt.Println(grouper(Shuffle(names4)))
-
 	names5 := []string{"a", "b", "c",
 		"d", "e", "h"}
-	fmt.Println(grouper(Shuffle(names5)))
-
 	names17 := []string{
 		"a", "b", "c",
 		"d", "e", "f",
@@ -27,7 +21,16 @@ func main() {
 		"m", "n", "o",
 		"p", "q",
 	}
-	fmt.Println(grouper(Shuffle(names17)))
+
+	Shuffle(names3)
+	Shuffle(names4)
+	Shuffle(names5)
+	Shuffle(names17)
+
+	fmt.Println(grouper(names3))
+	fmt.Println(grouper(names4))
+	fmt.Println(grouper(names5))
+	fmt.Println(grouper(names17))
 }
 
 func grouper(names []string) [][]string {
@@ -38,14 +41,9 @@ func grouper(names []string) [][]string {
 	return append(grouper(names[3:]), names[0:3])
 }
 
-func Shuffle(vals []string) []string {
-	r := rand.New(rand.NewSource(time.Now().Unix()))
-	ret := make([]string, len(vals))
-	perm := r.Perm(len(vals))
-	for i, randIndex := range perm {
-		ret[i] = vals[randIndex]
-	}
-	return ret
+func Shuffle(vals []string) {
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(vals), func(i, j int) { vals[i], vals[j] = vals[j], vals[i] })
 }
 
 func grouperIter(names []string) [][]string {
