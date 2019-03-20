@@ -1,36 +1,24 @@
 package main
 
 import (
+	"encoding/csv"
 	"fmt"
 	"math/rand"
+	"os"
 	"time"
 )
 
 func main() {
-	names3 := []string{"a", "b", "c",
-		"d", "e", "h"}
-	names4 := []string{"a", "b", "c",
-		"d", "e", "h"}
-	names5 := []string{"a", "b", "c",
-		"d", "e", "h"}
-	names17 := []string{
-		"a", "b", "c",
-		"d", "e", "f",
-		"g", "h", "i",
-		"j", "k", "l",
-		"m", "n", "o",
-		"p", "q",
+	// read a csv line from stdin
+	r := csv.NewReader(os.Stdin)
+	names, err := r.Read()
+	if err != nil {
+		panic("failed to read")
 	}
 
-	Shuffle(names3)
-	Shuffle(names4)
-	Shuffle(names5)
-	Shuffle(names17)
+	Shuffle(names)
 
-	fmt.Println(grouper(names3))
-	fmt.Println(grouper(names4))
-	fmt.Println(grouper(names5))
-	fmt.Println(grouper(names17))
+	fmt.Println(grouper(names))
 }
 
 func grouper(names []string) [][]string {
@@ -56,7 +44,6 @@ func grouperIter(names []string) [][]string {
 	// handle leftovers
 	if len(names) != 0 {
 		groups = append(groups, names)
-
 	}
 
 	return groups
